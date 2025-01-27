@@ -4,26 +4,36 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+import lombok.ToString;
 
 @Entity
 @Table(name = "tb_cadastro")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "missoes")
 public class NinjaModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idNinja;
+    @Column(name = "id")
+    private long id;
+
+    @Column(name = "nome")
     private String nome;
+
     @Column(unique = true)
     private String email;
+
+    @Column(name = "img_url")
+    private String imgUrl;
+
+    @Column(name = "rank")
+    private String rank;
+
+    @Column(name = "idade")
     private int idade;
 
-    // Um ninja tem uma única missão.
     @ManyToOne
-    @JoinColumn(name="missoes_id") //Foreign Key.
+    @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
 }
