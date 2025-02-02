@@ -28,4 +28,9 @@ public class NinjaController {
     public NinjaModel ListarNinjaPorId (@PathVariable Long id){
         return ninjaService.listarNinja(id);
     }
+
+    @PostMapping("/criar")
+    public NinjaModel criarNinja(@RequestBody NinjaModel ninja){
+        return ninjaService.criarNinja(ninja);
+    }
 }
