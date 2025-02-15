@@ -1,7 +1,5 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
-
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -20,18 +18,18 @@ public class NinjaController {
     }
 
     @GetMapping("/listar")
-    public List<NinjaModel> listarNinjas(){
+    public List<NinjaDTO> listarNinjas(){
         return ninjaService.listarNinjas();
     }
 
     @GetMapping("/listar/{id}")
-    public NinjaModel ListarNinjaPorId (@PathVariable Long id){
-        return ninjaService.listarNinja(id);
+    public NinjaDTO ListarNinjaPorId (@PathVariable Long id){
+        return ninjaService.listarNinjasPorId(id);
     }
 
     @PostMapping("/criar")
-    public NinjaModel criarNinja(@RequestBody NinjaModel ninja){
-        return ninjaService.criarNinja(ninja);
+    public NinjaDTO criarNinja(@RequestBody NinjaDTO ninjaDTO){
+        return ninjaService.criarNinja(ninjaDTO);
     }
 
     @DeleteMapping("/deletar/{id}")
