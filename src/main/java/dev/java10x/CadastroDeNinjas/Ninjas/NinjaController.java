@@ -1,11 +1,4 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
-import io.swagger.v3.oas.annotations.OpenAPI31;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -25,13 +18,13 @@ public class NinjaController {
     }
 
     @GetMapping("/listar")
-    public List<NinjaModel> listarNinjas(){
+    public List<NinjaDTO> listarNinjas(){
         return ninjaService.listarNinjas();
     }
 
     @GetMapping("/listar/{id}")
-    public NinjaModel ListarNinjaPorId (@PathVariable Long id){
-        return ninjaService.listarNinja(id);
+    public NinjaDTO ListarNinjaPorId (@PathVariable Long id){
+        return ninjaService.listarNinjasPorId(id);
     }
 
     @PostMapping("/criar")
