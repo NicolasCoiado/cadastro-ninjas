@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class NinjaMapper {
 
-    public NinjaModel map(@org.jetbrains.annotations.NotNull NinjaDTO ninjaDTO) {
+    public NinjaModel map(NinjaDTO ninjaDTO) {
 
         NinjaModel ninjaModel = new NinjaModel();
         ninjaModel.setId(ninjaDTO.getId());
