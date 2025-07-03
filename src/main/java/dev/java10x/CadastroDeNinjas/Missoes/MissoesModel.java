@@ -19,12 +19,16 @@ import java.util.List;
 public class MissoesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private Long id;
+
+    @Column (name = "nome")
     private String nome;
+
+    @Column (name = "dificuldade")
     private String dificuldade;
 
     // Uma missão pode possuir muitos ninjas.
     @OneToMany(mappedBy = "missoes")
-    @JoinColumn(name = "missoes_id") // Foreing Key ou Chave Estrangeira.
     private List<NinjaModel> ninja;
 }
