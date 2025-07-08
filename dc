@@ -1,0 +1,111 @@
+[1mdiff --git a/src/main/java/dev/java10x/CadastroDeNinjas/Missoes/MissoesController.java b/src/main/java/dev/java10x/CadastroDeNinjas/Missoes/MissoesController.java[m
+[1mindex dfca625..710a8f0 100644[m
+[1m--- a/src/main/java/dev/java10x/CadastroDeNinjas/Missoes/MissoesController.java[m
+[1m+++ b/src/main/java/dev/java10x/CadastroDeNinjas/Missoes/MissoesController.java[m
+[36m@@ -2,19 +2,33 @@[m [mpackage dev.java10x.CadastroDeNinjas.Missoes;[m
+ [m
+ import org.springframework.web.bind.annotation.*;[m
+ [m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m
+ @RestController[m
+ @RequestMapping ("/missoes")[m
+ public class MissoesController {[m
+[32m+[m
+[32m+[m[32m    private MissoesService missoesService;[m
+[32m+[m
+[32m+[m[32m    public MissoesController(MissoesService missoesService) {[m
+[32m+[m[32m        this.missoesService = missoesService;[m
+[32m+[m[32m    }[m
+[32m+[m
+     //GET[m
+     @GetMapping("/listar")[m
+[31m-    public String listarMissoes(){[m
+[31m-        return "Missoes listadas com sucesso.";[m
+[32m+[m[32m    public List<MissoesModel> listarMissoes(){[m
+[32m+[m[32m        return missoesService.listarMissoes();[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    @GetMapping("/listar/{id}")[m
+[32m+[m[32m    public MissoesModel listarMissaoPorId(@PathVariable Long id){[m
+[32m+[m[32m        return missoesService.listarMissaoPorId(id);[m
+     }[m
+ [m
+     //POST[m
+     @PostMapping("/criar")[m
+[31m-    public String criarMissao(){[m
+[31m-        return "Missao criada com sucesso.";[m
+[32m+[m[32m    public MissoesModel criarMissao(@RequestBody MissoesModel missao){[m
+[32m+[m[32m        return missoesService.criarMissao(missao);[m
+     }[m
+ [m
+     //PUT[m
+[36m@@ -24,8 +38,9 @@[m [mpublic class MissoesController {[m
+     }[m
+ [m
+     //DELETE[m
+[31m-    @DeleteMapping("/deletar")[m
+[31m-    public String deletarMissao(){[m
+[31m-        return "Missao deletada com sucesso.";[m
+[32m+[m[32m    @DeleteMapping("/deletar/{id}")[m
+[32m+[m[32m    public String deletarMissao(@PathVariable Long id){[m
+[32m+[m[32m        missoesService.deletarMissao(id);[m
+[32m+[m[32m        return "Missao deletada com sucesso!";[m
+     }[m
+ }[m
+[1mdiff --git a/src/main/java/dev/java10x/CadastroDeNinjas/Missoes/MissoesService.java b/src/main/java/dev/java10x/CadastroDeNinjas/Missoes/MissoesService.java[m
+[1mindex 673d84f..1329fa7 100644[m
+[1m--- a/src/main/java/dev/java10x/CadastroDeNinjas/Missoes/MissoesService.java[m
+[1m+++ b/src/main/java/dev/java10x/CadastroDeNinjas/Missoes/MissoesService.java[m
+[36m@@ -1,4 +1,33 @@[m
+ package dev.java10x.CadastroDeNinjas.Missoes;[m
+ [m
+[32m+[m[32mimport org.springframework.stereotype.Service;[m
+[32m+[m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m[32mimport java.util.Optional;[m
+[32m+[m
+[32m+[m[32m@Service[m
+ public class MissoesService {[m
+[32m+[m
+[32m+[m[32m    private MissoesRepository missoesRepository;[m
+[32m+[m
+[32m+[m[32m    public MissoesService(MissoesRepository missoesRepository) {[m
+[32m+[m[32m        this.missoesRepository = missoesRepository;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public List<MissoesModel> listarMissoes(){[m
+[32m+[m[32m        return missoesRepository.findAll();[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public MissoesModel listarMissaoPorId(Long id){[m
+[32m+[m[32m        Optional<MissoesModel> missaoPorId = missoesRepository.findById(id);[m
+[32m+[m[32m        return missaoPorId.orElse(null);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public MissoesModel criarMissao(MissoesModel missao){[m
+[32m+[m[32m        return missoesRepository.save(missao);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void deletarMissao(Long id){[m
+[32m+[m[32m        missoesRepository.deleteById(id);[m
+[32m+[m[32m    }[m
+ }[m
+[1mdiff --git a/src/main/java/dev/java10x/CadastroDeNinjas/Ninjas/NinjaService.java b/src/main/java/dev/java10x/CadastroDeNinjas/Ninjas/NinjaService.java[m
+[1mindex 5e3449c..d5edd8c 100644[m
+[1m--- a/src/main/java/dev/java10x/CadastroDeNinjas/Ninjas/NinjaService.java[m
+[1m+++ b/src/main/java/dev/java10x/CadastroDeNinjas/Ninjas/NinjaService.java[m
+[36m@@ -1,6 +1,5 @@[m
+ package dev.java10x.CadastroDeNinjas.Ninjas;[m
+ [m
+[31m-import org.springframework.beans.factory.annotation.Autowired;[m
+ import org.springframework.stereotype.Service;[m
+ [m
+ import java.util.List;[m
+[36m@@ -40,4 +39,4 @@[m [mpublic class NinjaService{[m
+     public void deletarNinja(Long id){[m
+         ninjaRepository.deleteById(id);[m
+     }[m
+[31m-}[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
