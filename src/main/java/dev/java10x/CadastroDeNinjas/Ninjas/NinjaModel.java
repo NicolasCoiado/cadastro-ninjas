@@ -8,11 +8,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="tb_ninjas")
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class NinjaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +35,4 @@ public class NinjaModel {
     @ManyToOne
     @JoinColumn(name = "missoes_id") // Criando uma chave estrangeira.
     private MissoesModel missoes;
-
-
 }

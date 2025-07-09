@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class NinjaService{
-
     private NinjaRepository ninjaRepository;
     private NinjaMapper ninjaMapper;
 
