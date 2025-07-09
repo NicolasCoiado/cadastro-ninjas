@@ -101,7 +101,7 @@ public class NinjaController {
     // Deletar ninja (DELETE)
     @DeleteMapping("/deletar/{id}")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "410", description = "Ninja excluído com sucesso."),
+            @ApiResponse(responseCode = "200", description = "Ninja excluído com sucesso."),
             @ApiResponse(responseCode = "404", description = "Ninja não cadastrado.")
     })
     @Operation(summary = "Excluir ninja", description = "Exclui um ninja identificado pelo seu ID.")
@@ -111,7 +111,7 @@ public class NinjaController {
     ){
         if(ninjaService.listarNinjasPorId(id) != null){
             ninjaService.deletarNinja(id);
-            return ResponseEntity.status(HttpStatus.GONE).body("Ninja com ID "+id+" deletado com sucesso!");
+            return ResponseEntity.ok("Ninja com ID "+id+" deletado com sucesso!");
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Nenhum ninja foi encontrado com o ID "+id+"!");
