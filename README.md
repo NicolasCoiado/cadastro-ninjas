@@ -100,6 +100,17 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
+---
+
+## 🐳 Disponível no Docker Hub
+
+Você pode rodar a aplicação rapidamente usando a imagem Docker disponível no Docker Hub:
+
+```
+docker pull nicolascoiado/cadastro-ninjas:latest
+docker run -p 8080:8080 nicolascoiado/cadastro-ninjas:latest
+```
+
 ## 💡 Possíveis Melhorias Futuras
 
 - Implementar Spring Security.
