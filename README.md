@@ -114,6 +114,5 @@ docker run -p 8080:8080 nicolascoiado/cadastro-ninjas:latest
 ## 💡 Possíveis Melhorias Futuras
 
 - Implementar Spring Security.
-- Dockerizar a Aplicação.
 - Migrar para um banco de dados MySQL.
 - Realizar Testes Unitários.
